@@ -9,7 +9,7 @@ const userTypeDef = `#graphql
   }
 
   type Query {
-    users: [User!]
+    # users: [User!] # testing with dummy data
     authUser: User
     user(userId:ID!): User
   }
