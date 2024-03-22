@@ -1,4 +1,6 @@
+import bcrypt from 'bcryptjs';
 import { users } from '../dummyData/data.js';
+import User from '../models/user.model.js';
 
 const userResolver = {
   Mutation: {
@@ -41,6 +43,7 @@ const userResolver = {
     login: async (_, { input }, context) => {
       try {
         const { username, password } = input;
+        if (!username || !password) throw new Error('All fields are required');
         const { user } = await context.authenticate('graphql-local', {
           username,
           password,
@@ -48,13 +51,14 @@ const userResolver = {
 
         await context.login(user);
         return user;
-      } catch (error) {
+      } catch (err) {
         console.error('Error in login:', err);
         throw new Error(err.message || 'Internal server error');
       }
     },
     logout: async (_, __, context) => {
       try {
+        const { req, res } = context;
         await context.logout();
         req.session.destroy((err) => {
           if (err) throw err;

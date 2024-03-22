@@ -50,6 +50,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+/* https://www.apollographql.com/docs/apollo-server/getting-started */
 const server = new ApolloServer({
   typeDefs: mergedTypeDefs,
   resolvers: mergedResolvers,
@@ -61,7 +62,7 @@ await server.start();
 // Set up our Express middleware to handle CORS, body parsing,
 // and our expressMiddleware function.
 app.use(
-  '/',
+  '/graphql',
   cors({
     origin: 'http://localhost:3000',
     credentials: true,
@@ -78,4 +79,4 @@ app.use(
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
 await connectDB();
 
-console.log(`🚀 Server ready at http://localhost:4000/`);
+console.log(`🚀 Server ready at http://localhost:4000/graphql`);
