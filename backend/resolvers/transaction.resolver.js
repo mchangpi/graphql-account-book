@@ -14,9 +14,10 @@ const transactionResolver = {
         throw new Error('Error getting transactions');
       }
     },
-    transaction: (_, { transactionId }) => {
+    transaction: async (_, { transactionId }) => {
       try {
-        const transaction = Transaction.findById({ transactionId });
+        const transaction = await Transaction.findById(transactionId);
+        // console.log('backend query txn:', transaction);
         return transaction;
       } catch (err) {
         console.error('Error getting transaction:', err);
@@ -53,9 +54,7 @@ const transactionResolver = {
     },
     deleteTransaction: async (_, { transactionId }) => {
       try {
-        const deletedTxn = await Transaction.findByIdAndDelete(
-          input.transactionId
-        );
+        const deletedTxn = await Transaction.findByIdAndDelete(transactionId);
         return deletedTxn;
       } catch (err) {
         console.error('Error deleting transaction:', err);

@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div className="mb-10">
       <h1 className="relative z-50 pt-10 text-center text-4xl  font-bold text-white md:text-6xl lg:text-8xl">
-        Expense <Link to="/">GQL</Link>
+        <Link to="/">GraphQL 記帳本</Link>
       </h1>
       <div className="relative mx-auto mb-10 hidden w-1/2 md:block">
         {/* Gradients */}

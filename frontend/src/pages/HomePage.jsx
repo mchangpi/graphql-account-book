@@ -47,6 +47,8 @@ const HomePage = () => {
   const handleLogout = async () => {
     try {
       await logout();
+      // Clear the Apollo Client cache FROM THE DOCS
+      // https://www.apollographql.com/docs/react/caching/advanced-topics/#resetting-the-cache
     } catch (error) {
       console.error('Error logging out:', error);
       toast.error(error.message);

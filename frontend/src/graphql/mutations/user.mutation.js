@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
 
 /* // user.typeDef.js
-type Mutation {
-	signUp(input: SignUpInput!): User
-	login(input: LoginInput!): User
-	logout: LogoutResponse
-} 
+  type Mutation {
+    signUp(input: SignUpInput!): User
+    login(input: LoginInput!): User
+    logout: LogoutResponse
+  } 
 */
 
 export const SIGN_UP = gql`
