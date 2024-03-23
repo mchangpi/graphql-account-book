@@ -11,6 +11,8 @@ import toast from 'react-hot-toast';
 import { useMutation } from '@apollo/client';
 import { DELETE_TRANSACTION } from '../graphql/mutations/transcation.mutation';
 
+import { categoryZhTwMap, paymentZhTwMap } from '../utils/langMap';
+
 const categoryColorMap = {
   saving: 'from-green-700 to-green-400',
   expense: 'from-pink-800 to-pink-600',
@@ -29,8 +31,8 @@ const Card = ({ transaction }) => {
 
   // Capitalize the first letter of the description
   description = description[0]?.toUpperCase() + description.slice(1);
-  category = category[0]?.toUpperCase() + category.slice(1);
-  paymentType = paymentType[0]?.toUpperCase() + paymentType.slice(1);
+  // category = category[0]?.toUpperCase() + category.slice(1);
+  // paymentType = paymentType[0]?.toUpperCase() + paymentType.slice(1);
 
   const formattedDate = formatDate(date);
 
@@ -50,7 +52,9 @@ const Card = ({ transaction }) => {
     <div className={`rounded-md bg-gradient-to-br p-4 ${cardClass}`}>
       <div className="flex flex-col gap-3">
         <div className="flex flex-row items-center justify-between">
-          <h2 className="text-lg font-bold text-white">{category}</h2>
+          <h2 className="text-lg font-bold text-white">
+            {categoryZhTwMap[transaction.category]}
+          </h2>
           <div className="flex items-center gap-2">
             {!loading && (
               <FaTrash className={'cursor-pointer'} onClick={handleDelete} />
@@ -65,19 +69,19 @@ const Card = ({ transaction }) => {
         </div>
         <p className="flex items-center gap-1 text-white">
           <BsCardText />
-          Description: {description}
+          項目: {description}
         </p>
         <p className="flex items-center gap-1 text-white">
           <MdOutlinePayments />
-          Payment Type: {paymentType}
+          支付方式: {paymentZhTwMap[transaction.paymentType]}
         </p>
         <p className="flex items-center gap-1 text-white">
           <FaSackDollar />
-          Amount: ${amount}
+          金額(新台幣): ${amount}
         </p>
         <p className="flex items-center gap-1 text-white">
           <FaLocationDot />
-          Location: {location || 'N/A'}
+          位置: {location || 'N/A'}
         </p>
         <div className="flex items-center justify-between">
           <p className="text-xs font-bold text-black">{formattedDate}</p>

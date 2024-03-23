@@ -1,10 +1,12 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { GET_TRANSACTION } from '../graphql/queries/transaction.query';
 import { UPDATE_TRANSACTION } from '../graphql/mutations/transcation.mutation';
 import toast from 'react-hot-toast';
 import TransactionFormSkeleton from '../components/skeletons/TransactionFormSkeleton';
+
+import { categoryZhTwMap, paymentZhTwMap } from '../utils/langMap';
 
 const TransactionPage = () => {
   const { id } = useParams();
@@ -74,22 +76,22 @@ const TransactionPage = () => {
   if (loading) return <TransactionFormSkeleton />;
 
   return (
-    <div className="mx-auto flex h-screen max-w-4xl flex-col items-center">
-      <p className="relative z-50 mb-4 mr-4 inline-block bg-gradient-to-r from-pink-600 via-indigo-500 to-pink-400 bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl lg:text-4xl">
-        Update this transaction
+    <div className="mx-auto flex h-screen max-w-5xl flex-col items-center">
+      <p className="relative z-50 mb-4 mr-4 inline-block bg-gradient-to-r from-pink-600 via-indigo-500 to-pink-400 bg-clip-text text-center text-3xl font-bold text-transparent md:text-4xl lg:text-4xl">
+        更新此帳目
       </p>
       <form
-        className="flex w-full max-w-lg flex-col gap-5 px-3 "
+        className="flex w-full max-w-xl flex-col gap-5 px-3 "
         onSubmit={handleSubmit}
       >
         {/* TRANSACTION */}
         <div className="flex flex-wrap">
           <div className="w-full">
             <label
-              className="mb-2 block text-xs font-bold uppercase tracking-wide text-white"
+              className="mb-2 block text-base font-bold uppercase tracking-wide text-white"
               htmlFor="description"
             >
-              Transaction
+              項目
             </label>
             <input
               className="block w-full appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
@@ -106,10 +108,10 @@ const TransactionPage = () => {
         <div className="flex flex-wrap gap-3">
           <div className="mb-6 w-full flex-1 md:mb-0">
             <label
-              className="mb-2 block text-xs font-bold uppercase tracking-wide text-white"
+              className="mb-2 block text-base font-bold uppercase tracking-wide text-white"
               htmlFor="paymentType"
             >
-              Payment Type
+              支付方式
             </label>
             <div className="relative">
               <select
@@ -119,8 +121,8 @@ const TransactionPage = () => {
                 onChange={handleInputChange}
                 defaultValue={formData.paymentType}
               >
-                <option value={'card'}>Card</option>
-                <option value={'cash'}>Cash</option>
+                <option value={'card'}>{paymentZhTwMap['card']}</option>
+                <option value={'cash'}>{paymentZhTwMap['cash']}</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
@@ -137,10 +139,10 @@ const TransactionPage = () => {
           {/* CATEGORY */}
           <div className="mb-6 w-full flex-1 md:mb-0">
             <label
-              className="mb-2 block text-xs font-bold uppercase tracking-wide text-white"
+              className="mb-2 block text-base font-bold uppercase tracking-wide text-white"
               htmlFor="category"
             >
-              Category
+              類別
             </label>
             <div className="relative">
               <select
@@ -148,11 +150,13 @@ const TransactionPage = () => {
                 id="category"
                 name="category"
                 onChange={handleInputChange}
-                defaultValue={formData.category}
+                defaultValue={categoryZhTwMap[formData.category]}
               >
-                <option value={'saving'}>Saving</option>
-                <option value={'expense'}>Expense</option>
-                <option value={'investment'}>Investment</option>
+                <option value={'saving'}>{categoryZhTwMap['saving']}</option>
+                <option value={'expense'}>{categoryZhTwMap['expense']}</option>
+                <option value={'investment'}>
+                  {categoryZhTwMap['investment']}
+                </option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
@@ -169,10 +173,10 @@ const TransactionPage = () => {
           {/* AMOUNT */}
           <div className="mb-6 w-full flex-1 md:mb-0">
             <label
-              className="mb-2 block text-xs font-bold uppercase text-white"
+              className="mb-2 block text-base font-bold uppercase text-white"
               htmlFor="amount"
             >
-              Amount($)
+              金額(新台幣)
             </label>
             <input
               className="block w-full appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
@@ -190,10 +194,10 @@ const TransactionPage = () => {
         <div className="flex flex-wrap gap-3">
           <div className="mb-6 w-full flex-1 md:mb-0">
             <label
-              className="mb-2 block text-xs font-bold uppercase tracking-wide text-white"
+              className="mb-2 block text-base font-bold uppercase tracking-wide text-white"
               htmlFor="location"
             >
-              Location
+              位置
             </label>
             <input
               className="mb-3 block w-full appearance-none rounded border  bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:bg-white focus:outline-none"
@@ -209,10 +213,10 @@ const TransactionPage = () => {
           {/* DATE */}
           <div className="w-full flex-1">
             <label
-              className="mb-2 block text-xs font-bold uppercase tracking-wide text-white"
+              className="mb-2 block text-base font-bold uppercase tracking-wide text-white"
               htmlFor="date"
             >
-              Date
+              日期
             </label>
             <input
               type="date"
@@ -227,14 +231,25 @@ const TransactionPage = () => {
           </div>
         </div>
         {/* SUBMIT BUTTON */}
-        <button
-          className="w-full rounded bg-gradient-to-br from-pink-500 to-pink-500 px-4 py-2
+        <div className="flex space-x-2">
+          <Link to="/" className="w-full">
+            <button
+              className="w-full rounded bg-gradient-to-br from-violet-500 to-violet-500 px-4 py-2
+          font-bold text-white hover:from-violet-600 hover:to-violet-600"
+              type="button"
+            >
+              回主頁
+            </button>
+          </Link>
+          <button
+            className="w-full rounded bg-gradient-to-br from-pink-500 to-pink-500 px-4 py-2
           font-bold text-white hover:from-pink-600 hover:to-pink-600"
-          type="submit"
-          disabled={loadingUpdate}
-        >
-          {loadingUpdate ? 'Updating...' : 'Update Transaction'}
-        </button>
+            type="submit"
+            disabled={loadingUpdate}
+          >
+            {loadingUpdate ? 'Updating...' : '更新帳目'}
+          </button>
+        </div>
       </form>
     </div>
   );

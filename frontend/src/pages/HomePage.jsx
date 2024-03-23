@@ -38,7 +38,7 @@ const HomePage = () => {
 
   /* https://www.apollographql.com/docs/react/data/mutations */
   /* https://www.apollographql.com/docs/react/data/refetching/#clientrefetchqueries */
-  const [logout, { loading, data }] = useMutation(LOGOUT, {
+  const [logout, { loading, data, client }] = useMutation(LOGOUT, {
     refetchQueries: [
       'GetAuthenticatedUser',
     ] /* get null authUser after logging out */,
@@ -47,8 +47,10 @@ const HomePage = () => {
   const handleLogout = async () => {
     try {
       await logout();
+
       // Clear the Apollo Client cache FROM THE DOCS
       // https://www.apollographql.com/docs/react/caching/advanced-topics/#resetting-the-cache
+      await client.resetStore();
     } catch (error) {
       console.error('Error logging out:', error);
       toast.error(error.message);
@@ -59,10 +61,10 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="relative z-20 mx-auto flex max-w-7xl flex-col items-center justify-center gap-6">
-        <div className="flex items-center">
+      <div className="relative z-20 mx-auto flex max-w-7xl flex-col items-center justify-center gap-6 ">
+        <div className="flex items-center space-x-4">
           <p className="relative z-50 mb-4 mr-4 inline-block bg-gradient-to-r from-pink-600 via-indigo-500 to-pink-400 bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl lg:text-4xl">
-            Spend wisely, track wisely
+            記住每一筆，財富自在手！{/* Spend wisely, track wisely */}
           </p>
           <img
             src={'https://tecdn.b-cdn.net/img/new/avatars/2.webp'}
@@ -71,7 +73,7 @@ const HomePage = () => {
           />
           {!loading && (
             <MdLogout
-              className="mx-2 h-5 w-5 cursor-pointer"
+              className="mx-2 h-7 w-7 cursor-pointer"
               onClick={handleLogout}
             />
           )}
