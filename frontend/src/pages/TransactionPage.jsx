@@ -76,8 +76,9 @@ const TransactionPage = () => {
   if (import.meta.env.VITE_DEBUG) {
     if (data) console.log('txn data:', data);
     if (updateData) console.log('update txn data:', updateData);
-    if (loading) return <TransactionFormSkeleton />;
   }
+
+  if (loading) return <TransactionFormSkeleton />;
 
   return (
     <div className="mx-auto flex h-screen max-w-5xl flex-col items-center">
@@ -123,10 +124,19 @@ const TransactionPage = () => {
                 id="paymentType"
                 name="paymentType"
                 onChange={handleInputChange}
-                defaultValue={formData.paymentType}
               >
-                <option value={'cash'}>{paymentZhTwMap['cash']}</option>
-                <option value={'card'}>{paymentZhTwMap['card']}</option>
+                <option
+                  value={'cash'}
+                  selected={formData.paymentType === 'cash'}
+                >
+                  {paymentZhTwMap['cash']}
+                </option>
+                <option
+                  value={'card'}
+                  selected={formData.paymentType === 'card'}
+                >
+                  {paymentZhTwMap['card']}
+                </option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
@@ -154,11 +164,23 @@ const TransactionPage = () => {
                 id="category"
                 name="category"
                 onChange={handleInputChange}
-								defaultValue={formData.category}
               >
-                <option value={'expense'}>{categoryZhTwMap['expense']}</option>
-                <option value={'saving'}>{categoryZhTwMap['saving']}</option>
-                <option value={'investment'}>
+                <option
+                  value={'expense'}
+                  selected={formData.category === 'expense'}
+                >
+                  {categoryZhTwMap['expense']}
+                </option>
+                <option
+                  value={'saving'}
+                  selected={formData.category === 'saving'}
+                >
+                  {categoryZhTwMap['saving']}
+                </option>
+                <option
+                  value={'investment'}
+                  selected={formData.category === 'investment'}
+                >
                   {categoryZhTwMap['investment']}
                 </option>
               </select>
