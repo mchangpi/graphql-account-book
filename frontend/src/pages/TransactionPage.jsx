@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { GET_TRANSACTION } from '../graphql/queries/transaction.query';
 import { UPDATE_TRANSACTION } from '../graphql/mutations/transcation.mutation';
 import toast from 'react-hot-toast';
@@ -11,6 +11,7 @@ import { categoryZhTwMap, paymentZhTwMap } from '../utils/langMap';
 const TransactionPage = () => {
   const { id } = useParams();
   // console.log('txn id', id);
+  const navigate = useNavigate();
 
   const { loading, data } = useQuery(GET_TRANSACTION, {
     variables: { id: id },
@@ -19,7 +20,6 @@ const TransactionPage = () => {
   const [updateTransaction, { loading: updateLoading, data: updateData }] =
     useMutation(UPDATE_TRANSACTION, {
       refetchQueries: ['GetTransactionStatistics'],
-      // refetchQueries: ['GetTransactions', 'GetTransactionStatistics'],
     });
 
   const [formData, setFormData] = useState({
@@ -60,6 +60,7 @@ const TransactionPage = () => {
         },
       });
       toast.success('Transaction updated sucsessfully');
+      navigate('/');
     } catch (error) {
       toast.error(error.message);
     }
