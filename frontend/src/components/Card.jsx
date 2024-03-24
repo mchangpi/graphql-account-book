@@ -85,11 +85,14 @@ const Card = ({ transaction, authUser }) => {
         </p>
         <div className="flex items-center justify-between">
           <p className="text-xs font-bold text-black">{formattedDate}</p>
-          <img
-            src={authUser?.profilePicture}
-            className="h-8 w-8 rounded-full border"
-            alt=""
-          />
+          <div className="flex items-center space-x-2">
+            <img
+              src={authUser?.profilePicture}
+              className="h-8 w-8 rounded-full border"
+              alt=""
+            />
+            <span className="text-lg">{authUser?.username}</span>
+          </div>
         </div>
       </div>
     </div>

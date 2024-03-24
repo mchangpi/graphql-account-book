@@ -101,18 +101,21 @@ const HomePage = () => {
   return (
     <>
       <div className="relative z-20 mx-auto flex max-w-7xl flex-col items-center justify-center gap-6 ">
-        <div className="flex items-center space-x-6">
+        <div className="flex w-1/2 items-start justify-between space-x-6">
+          <div className="flex items-center space-x-2">
+            <img
+              src={authUserData?.authUser.profilePicture}
+              className="h-11 w-11 cursor-pointer rounded-full border"
+              alt="Avatar"
+            />
+            <span className="text-2xl">{authUserData?.authUser?.username}</span>
+          </div>
           <p className="relative z-50 mb-4 mr-4 inline-block bg-gradient-to-r from-pink-600 via-indigo-500 to-pink-400 bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl lg:text-4xl">
-            記住每一筆，財富自在手！{/* Spend wisely, track wisely */}
+            記帳理財，掌握未來{/* Spend wisely, track wisely */}
           </p>
-          <img
-            src={authUserData?.authUser.profilePicture}
-            className="h-11 w-11 cursor-pointer rounded-full border"
-            alt="Avatar"
-          />
           {!loading && (
             <div
-              className="flex cursor-pointer rounded-md border border-slate-400 py-1 pl-3"
+              className="mt-1 flex cursor-pointer rounded-md border border-slate-400 py-1 pl-3"
               onClick={handleLogout}
             >
               <span className="text-lg">登出</span>
