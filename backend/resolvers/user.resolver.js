@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
-import { users } from '../dummyData/data.js';
+// import { users } from '../dummyData/data.js';
 import User from '../models/user.model.js';
+import Transaction from '../models/transaction.model.js';
 
 const userResolver = {
   Mutation: {
@@ -88,11 +89,24 @@ const userResolver = {
     },
     user: async (_, { userId }) => {
       try {
-        const user = users.find((user) => user._id === userId);
+        const user = await User.findById(userId);
+        console.log('userId', userId, ',user', user);
         return user;
       } catch (err) {
         console.error('Error in user query:', err);
         throw new Error(err.message || 'Error getting user');
+      }
+    },
+  },
+  User: {
+    transactions: async (parent) => {
+      try {
+        const transactions = await Transaction.find({ userId: parent._id });
+        // console.log('backend: userId', parent._id, ',txns', transactions);
+        return transactions;
+      } catch (err) {
+        console.log('Error in user.transactions resolver: ', err);
+        throw new Error(err.message || 'Internal server error');
       }
     },
   },

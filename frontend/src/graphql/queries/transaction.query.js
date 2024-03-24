@@ -4,6 +4,7 @@ import { gql } from '@apollo/client';
 	type Query {
 		transactions: [Transaction!]
 		transaction(transactionId:ID!): Transaction
+    categoryStatistics: [CategoryStatistics!]
 	}
 */
 
@@ -32,6 +33,20 @@ export const GET_TRANSACTION = gql`
       amount
       location
       date
+      user {
+        name
+        username
+        profilePicture
+      }
+    }
+  }
+`;
+
+export const GET_TRANSACTION_STATISTICS = gql`
+  query GetTransactionStatistics {
+    categoryStatistics {
+      category
+      totalAmount
     }
   }
 `;

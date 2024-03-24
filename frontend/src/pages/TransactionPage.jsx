@@ -16,8 +16,11 @@ const TransactionPage = () => {
     variables: { id: id },
   });
 
-  const [updateTransaction, { loading: loadingUpdate, data: dataUpdate }] =
-    useMutation(UPDATE_TRANSACTION);
+  const [updateTransaction, { loading: updateLoading, data: updateData }] =
+    useMutation(UPDATE_TRANSACTION, {
+      refetchQueries: ['GetTransactionStatistics'],
+      // refetchQueries: ['GetTransactions', 'GetTransactionStatistics'],
+    });
 
   const [formData, setFormData] = useState({
     description: data?.transaction?.description || '',
@@ -70,8 +73,8 @@ const TransactionPage = () => {
     }));
   };
 
-  if (data) console.log('query txn data:', data);
-  if (dataUpdate) console.log('update txn data:', dataUpdate);
+  if (data) console.log('txn data:', data);
+  if (updateData) console.log('update txn data:', updateData);
 
   if (loading) return <TransactionFormSkeleton />;
 
@@ -121,8 +124,8 @@ const TransactionPage = () => {
                 onChange={handleInputChange}
                 defaultValue={formData.paymentType}
               >
-                <option value={'card'}>{paymentZhTwMap['card']}</option>
                 <option value={'cash'}>{paymentZhTwMap['cash']}</option>
+                <option value={'card'}>{paymentZhTwMap['card']}</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
@@ -152,8 +155,8 @@ const TransactionPage = () => {
                 onChange={handleInputChange}
                 defaultValue={categoryZhTwMap[formData.category]}
               >
-                <option value={'saving'}>{categoryZhTwMap['saving']}</option>
                 <option value={'expense'}>{categoryZhTwMap['expense']}</option>
+                <option value={'saving'}>{categoryZhTwMap['saving']}</option>
                 <option value={'investment'}>
                   {categoryZhTwMap['investment']}
                 </option>
@@ -204,7 +207,7 @@ const TransactionPage = () => {
               id="location"
               name="location"
               type="text"
-              placeholder="New York"
+              placeholder="台北"
               value={formData.location}
               onChange={handleInputChange}
             />
@@ -245,9 +248,9 @@ const TransactionPage = () => {
             className="w-full rounded bg-gradient-to-br from-pink-500 to-pink-500 px-4 py-2
           font-bold text-white hover:from-pink-600 hover:to-pink-600"
             type="submit"
-            disabled={loadingUpdate}
+            disabled={updateLoading}
           >
-            {loadingUpdate ? 'Updating...' : '更新帳目'}
+            {updateLoading ? 'Updating...' : '更新帳目'}
           </button>
         </div>
       </form>

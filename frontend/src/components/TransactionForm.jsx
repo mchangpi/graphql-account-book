@@ -7,7 +7,7 @@ import { categoryZhTwMap, paymentZhTwMap } from '../utils/langMap';
 const TransactionForm = () => {
   const [createTransaction, { loading, data }] = useMutation(
     CREATE_TRANSACTION,
-    { refetchQueries: ['GetTransactions'] },
+    { refetchQueries: ['GetTransactions', 'GetTransactionStatistics'] },
   );
 
   const handleSubmit = async (e) => {
@@ -75,8 +75,8 @@ const TransactionForm = () => {
               id="paymentType"
               name="paymentType"
             >
-              <option value={'card'}>{paymentZhTwMap['card']}</option>
               <option value={'cash'}>{paymentZhTwMap['cash']}</option>
+              <option value={'card'}>{paymentZhTwMap['card']}</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
@@ -104,8 +104,8 @@ const TransactionForm = () => {
               id="category"
               name="category"
             >
-              <option value={'saving'}>{categoryZhTwMap['saving']}</option>
               <option value={'expense'}>{categoryZhTwMap['expense']}</option>
+              <option value={'saving'}>{categoryZhTwMap['saving']}</option>
               <option value={'investment'}>
                 {categoryZhTwMap['investment']}
               </option>
@@ -154,7 +154,7 @@ const TransactionForm = () => {
             id="location"
             name="location"
             type="text"
-            placeholder="New York"
+            placeholder="台北"
           />
         </div>
 
@@ -172,7 +172,8 @@ const TransactionForm = () => {
             id="date"
             className="mb-3 block w-full appearance-none rounded border  bg-gray-200 px-4 py-[11px] leading-tight text-gray-700 focus:bg-white
 						 focus:outline-none"
-            placeholder="Select date"
+            // placeholder="Select date"
+            value={new Date().toISOString().substring(0, 10)}
           />
         </div>
       </div>
