@@ -16,7 +16,9 @@ function App() {
 
   if (loading) return null;
 
-  if (data) console.log('query auth user:', data);
+  if (import.meta.env.VITE_DEBUG) {
+    if (data) console.log('query auth user:', data);
+  }
 
   return (
     <>

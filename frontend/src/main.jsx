@@ -8,7 +8,6 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 /* https://www.apollographql.com/docs/react/get-started#step-3-initialize-apolloclient */
 const client = new ApolloClient({
-  /* the URL of our GraphQL server. TODO => Update this uri when deploying */
   uri:
     import.meta.env.VITE_NODE_ENV === 'development'
       ? 'http://localhost:4000/graphql'

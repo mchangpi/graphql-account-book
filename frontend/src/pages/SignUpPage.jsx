@@ -49,7 +49,9 @@ const SignUpPage = () => {
     }
   };
 
-  if (data) console.log('signup data', data);
+  if (import.meta.env.VITE_DEBUG) {
+    if (data) console.log('signup data', data);
+  }
 
   return (
     <div className="flex h-screen items-center justify-center">

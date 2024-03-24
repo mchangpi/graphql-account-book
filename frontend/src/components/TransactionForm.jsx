@@ -33,7 +33,9 @@ const TransactionForm = () => {
     }
   };
 
-  if (data) console.log('create txn data:', data);
+  if (import.meta.env.VITE_DEBUG) {
+    if (data) console.log('create txn data:', data);
+  }
 
   return (
     <form
@@ -173,7 +175,7 @@ const TransactionForm = () => {
             className="mb-3 block w-full appearance-none rounded border  bg-gray-200 px-4 py-[11px] leading-tight text-gray-700 focus:bg-white
 						 focus:outline-none"
             // placeholder="Select date"
-            value={new Date().toISOString().substring(0, 10)}
+            defaultValue={new Date().toISOString().substring(0, 10)}
           />
         </div>
       </div>

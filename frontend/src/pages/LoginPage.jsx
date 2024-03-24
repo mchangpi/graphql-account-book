@@ -41,7 +41,9 @@ const LoginPage = () => {
     }
   };
 
-  if (data) console.log('login data', data);
+  if (import.meta.env.VITE_DEBUG) {
+    if (data) console.log('login data', data);
+  }
 
   return (
     <div className="flex h-screen items-center justify-center">

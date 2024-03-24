@@ -92,9 +92,11 @@ const HomePage = () => {
     }
   };
 
-  if (txnStatsData) console.log('txn stats data:', txnStatsData);
-  if (authUserData) console.log('auth user data:', authUserData);
-  if (logoutData) console.log('logout data:', logoutData);
+  if (import.meta.env.VITE_DEBUG) {
+    if (txnStatsData) console.log('txn stats data:', txnStatsData);
+    if (authUserData) console.log('auth user data:', authUserData);
+    if (logoutData) console.log('logout data:', logoutData);
+  }
 
   return (
     <>

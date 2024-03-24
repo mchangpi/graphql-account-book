@@ -73,10 +73,11 @@ const TransactionPage = () => {
     }));
   };
 
-  if (data) console.log('txn data:', data);
-  if (updateData) console.log('update txn data:', updateData);
-
-  if (loading) return <TransactionFormSkeleton />;
+  if (import.meta.env.VITE_DEBUG) {
+    if (data) console.log('txn data:', data);
+    if (updateData) console.log('update txn data:', updateData);
+    if (loading) return <TransactionFormSkeleton />;
+  }
 
   return (
     <div className="mx-auto flex h-screen max-w-5xl flex-col items-center">

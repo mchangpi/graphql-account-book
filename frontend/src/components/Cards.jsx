@@ -17,9 +17,11 @@ const Cards = () => {
     },
   });
 
-  if (txnsData) console.log('txns data:', txnsData);
-  if (authUserData) console.log('auth user data:', authUserData);
-  if (userAndTxnsData) console.log('user & txns data:', userAndTxnsData);
+  if (import.meta.env.VITE_DEBUG) {
+    if (txnsData) console.log('txns data:', txnsData);
+    if (authUserData) console.log('auth user data:', authUserData);
+    if (userAndTxnsData) console.log('user & txns data:', userAndTxnsData);
+  }
 
   return (
     <div className="min-h-[40vh] w-full px-10">
@@ -36,7 +38,8 @@ const Cards = () => {
       </div>
       {!loading && txnsData?.transactions?.length === 0 && (
         <p className="w-full text-center text-2xl font-bold">
-          No transaction history found.
+          {/* No transaction history found. */}
+          此帳本沒有帳目，請由上表新增帳目。
         </p>
       )}
     </div>
