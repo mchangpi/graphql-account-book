@@ -6,8 +6,7 @@ const transactionResolver = {
     transactions: async (_, __, context) => {
       try {
         if (!context.getUser()) {
-          // throw new Error('Unauthorized');
-          return [];
+          throw new Error('Unauthorized');
         }
         const userId = await context.getUser()._id;
 
