@@ -51,14 +51,17 @@ const LoginPage = () => {
         <div className="flex w-full min-w-80 items-center justify-center bg-gray-100 sm:min-w-96">
           <div className="w-full max-w-md p-6">
             <h1 className="mb-6 text-center text-3xl font-semibold text-black">
-              Login
+              {/* Login */}
+              登入
             </h1>
-            <h1 className="mb-6 text-center text-sm font-semibold text-gray-500">
-              Welcome back! Log in to your account
+            <h1 className="mb-6 text-center text-base font-semibold text-gray-500">
+              {/* Welcome back! Log in to your account */}
+              歡迎回來，請以您的帳號登入
             </h1>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <InputField
-                label="Username"
+                // label="Username"
+                label="帳號"
                 id="username"
                 name="username"
                 value={loginData.username}
@@ -66,7 +69,8 @@ const LoginPage = () => {
               />
 
               <InputField
-                label="Password"
+                // label="Password"
+                label="密碼"
                 id="password"
                 name="password"
                 type="password"
@@ -76,20 +80,21 @@ const LoginPage = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full rounded-md bg-black p-2 text-white transition-colors duration-300 hover:bg-gray-800  focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2
-										disabled:cursor-not-allowed disabled:opacity-50
-									"
+                  className="w-full rounded-md bg-black p-2 text-white transition-colors duration-300 hover:bg-gray-800  focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   disabled={loading}
                 >
-                  {loading ? 'Loading...' : 'Login'}
+                  {/* {loading ? 'Loading...' : 'Login'} */}
+                  {loading ? 'Loading...' : '登入'}
                 </button>
               </div>
             </form>
-            <div className="mt-4 text-center text-sm text-gray-600">
+            <div className="mt-4 text-center text-base text-gray-600">
               <p>
-                {"Don't"} have an account?{' '}
-                <Link to="/signup" className="text-black hover:underline">
-                  Sign Up
+                {/* {"Don't"} have an account?{' '} */}
+                還沒有帳號?{' '}
+                <Link to="/signup" className="text-blue-500 hover:underline">
+                  {/* Sign Up */}
+                  註冊
                 </Link>
               </p>
             </div>
