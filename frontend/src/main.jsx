@@ -9,7 +9,10 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 /* https://www.apollographql.com/docs/react/get-started#step-3-initialize-apolloclient */
 const client = new ApolloClient({
   /* the URL of our GraphQL server. TODO => Update this uri when deploying */
-  uri: 'http://localhost:4000/graphql',
+  uri:
+    import.meta.env.VITE_NODE_ENV === 'development'
+      ? 'http://localhost:4000/graphql'
+      : '/graphql', // the URL of our Graph
   /* Apollo Client uses to cache query results after fetching them. */
   cache: new InMemoryCache(),
   /* This tells Apollo Client to send cookies along with every request to the server. */

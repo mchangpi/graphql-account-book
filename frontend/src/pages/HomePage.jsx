@@ -5,7 +5,7 @@ import Cards from '../components/Cards';
 import TransactionForm from '../components/TransactionForm';
 
 import { MdLogout } from 'react-icons/md';
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 import { useQuery, useMutation } from '@apollo/client';
 import { LOGOUT } from '../graphql/mutations/user.mutation.js';
 import { GET_TRANSACTION_STATISTICS } from '../graphql/queries/transaction.query';
@@ -94,7 +94,6 @@ const HomePage = () => {
 
   if (txnStatsData) console.log('txn stats data:', txnStatsData);
   if (authUserData) console.log('auth user data:', authUserData);
-
   if (logoutData) console.log('logout data:', logoutData);
 
   return (
