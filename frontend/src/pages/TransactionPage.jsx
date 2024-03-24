@@ -124,19 +124,10 @@ const TransactionPage = () => {
                 id="paymentType"
                 name="paymentType"
                 onChange={handleInputChange}
+                value={formData.paymentType}
               >
-                <option
-                  value={'cash'}
-                  selected={formData.paymentType === 'cash'}
-                >
-                  {paymentZhTwMap['cash']}
-                </option>
-                <option
-                  value={'card'}
-                  selected={formData.paymentType === 'card'}
-                >
-                  {paymentZhTwMap['card']}
-                </option>
+                <option value={'cash'}>{paymentZhTwMap['cash']}</option>
+                <option value={'card'}>{paymentZhTwMap['card']}</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
@@ -164,23 +155,11 @@ const TransactionPage = () => {
                 id="category"
                 name="category"
                 onChange={handleInputChange}
+                value={formData.category}
               >
-                <option
-                  value={'expense'}
-                  selected={formData.category === 'expense'}
-                >
-                  {categoryZhTwMap['expense']}
-                </option>
-                <option
-                  value={'saving'}
-                  selected={formData.category === 'saving'}
-                >
-                  {categoryZhTwMap['saving']}
-                </option>
-                <option
-                  value={'investment'}
-                  selected={formData.category === 'investment'}
-                >
+                <option value={'expense'}>{categoryZhTwMap['expense']}</option>
+                <option value={'saving'}>{categoryZhTwMap['saving']}</option>
+                <option value={'investment'}>
                   {categoryZhTwMap['investment']}
                 </option>
               </select>
