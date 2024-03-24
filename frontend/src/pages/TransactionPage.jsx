@@ -154,7 +154,7 @@ const TransactionPage = () => {
                 id="category"
                 name="category"
                 onChange={handleInputChange}
-                defaultValue={categoryZhTwMap[formData.category]}
+								defaultValue={formData.category}
               >
                 <option value={'expense'}>{categoryZhTwMap['expense']}</option>
                 <option value={'saving'}>{categoryZhTwMap['saving']}</option>
