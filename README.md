@@ -17,7 +17,7 @@ https://github.com/mchangpi/graphql-account-book
 
 3\. 前端(React.js)與後端(Node.js)之間的 API 介面採用 GraphQL 格式，並以 Apollo 套件管理前端向後端發出的 query 及 mutation 請求，以新增/檢視/修改/刪除帳目。
 
-4\. 後端以 grahql-passport 套件管理使用者認證，使用者以帳號/密碼註冊並登入網站，並以 session/cookie 機制維持使用者的登入狀態。
+4\. 後端以 graphql-passport 套件管理使用者認證，使用者以帳號/密碼註冊並登入網站，並以 session/cookie 機制維持使用者的登入狀態。
 
 5\. 我的聯絡資訊如下，謝謝。
 
