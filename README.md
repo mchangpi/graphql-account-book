@@ -8,7 +8,7 @@ https://www.cakeresume.com/mchangpi
 而實作的 GraphQL 記帳網站:
 
 https://graphql-accountbook.onrender.com/  
-(可自行註冊登入，或是使用測試帳號/密碼 test/text)
+(可自行註冊登入，或是使用測試帳號/密碼 test/test)
 
 相關程式碼:  
 https://github.com/mchangpi/graphql-account-book
