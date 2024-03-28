@@ -33,7 +33,7 @@ const userResolver = {
         });
 
         await newUser.save();
-        /* https://www.npmjs.com/package/graphql-passport */
+        /* https://github.com/ericmakesapps/graphql-passport */
         await context.login(newUser);
         return newUser;
       } catch (err) {

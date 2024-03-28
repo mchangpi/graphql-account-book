@@ -21,7 +21,7 @@ export const configurePassport = async () => {
     }
   });
 
-  /* https://www.npmjs.com/package/graphql-passport */
+  /* https://github.com/ericmakesapps/graphql-passport */
   passport.use(
     new GraphQLLocalStrategy(async (username, password, done) => {
       try {
